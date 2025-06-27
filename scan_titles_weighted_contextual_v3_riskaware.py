@@ -57,7 +57,7 @@ def scan_titles_weighted(titles, df_keywords, df_severity):
                 if pd.notna(row.get('category')):
                     categories.add(row['category'])
 
-                severity = df_severity.loc[df_severity['Keyword'] == keyword, 'SeverityScoreDeduction'].values
+                severity = df_severity[df_severity['Keyword'].astype(str).str.lower() == keyword]['SeverityScoreDeduction'].values
                 if severity.size > 0:
                     total_severity += severity[0]
 
