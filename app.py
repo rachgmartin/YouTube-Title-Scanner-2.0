@@ -46,6 +46,7 @@ if st.button("Scan Titles") and api_key and channel_id:
                 st.warning("No titles found or API quota exceeded.")
             else:
                 df_keywords = pd.read_csv("updated_keywords_expanded.csv")
+                df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
                 df_severity = pd.read_csv("safety_severity_scores.csv")
                 df_results = scan_titles_weighted(titles, df_keywords, df_severity)
                 st.success("Scan complete!")
