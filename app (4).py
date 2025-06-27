@@ -1,0 +1,70 @@
+
+import streamlit as st
+import pandas as pd
+from scan_titles_weighted_contextual_v3_riskaware import scan_titles_weighted
+import requests
+
+st.set_page_config(page_title="YouTube Title Scanner", layout="centered")
+st.title("YouTube Title Scanner")
+st.markdown("Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives.")
+
+api_key = st.text_input("Enter your YouTube Data API Key", type="password")
+channel_id = st.text_input("Enter the YouTube Channel ID (e.g., UC_x5XG1OV2P6uZZ5FSM9Ttw)")
+max_results = st.number_input("Maximum number of titles to fetch", min_value=1, max_value=500, value=100)
+
+def get_uploads_playlist_id(api_key, channel_id):
+    url = f"https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id={channel_id}&key={api_key}"
+    response = requests.get(url).json()
+    try:
+        return response['items'][0]['contentDetails']['relatedPlaylists']['uploads']
+    except (KeyError, IndexError):
+        return None
+
+def fetch_video_titles(api_key, uploads_playlist_id, max_results):
+    titles = []
+    page_token = ""
+    while len(titles) < max_results:
+        url = f"https://www.googleapis.com/youtube/v3/playlistItems?key={api_key}&playlistId={uploads_playlist_id}&part=snippet&maxResults=50&pageToken={page_token}"
+        response = requests.get(url).json()
+        for item in response.get("items", []):
+            titles.append(item["snippet"]["title"])
+        page_token = response.get("nextPageToken", "")
+        if not page_token:
+            break
+    return titles[:max_results]
+
+if st.button("Scan Titles") and api_key and channel_id:
+    try:
+        st.info("Fetching video titles...")
+        uploads_playlist_id = get_uploads_playlist_id(api_key, channel_id)
+        if not uploads_playlist_id:
+            st.error("Failed to retrieve uploads playlist. Check Channel ID.")
+        else:
+            titles = fetch_video_titles(api_key, uploads_playlist_id, max_results)
+            if not titles:
+                st.warning("No titles found or API quota exceeded.")
+            else:
+                df_keywords = pd.read_csv("updated_keywords_expanded.csv")
+                df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
+
+                df_severity = pd.read_csv("safety_severity_scores.csv")
+                df_severity.rename(columns={"Keyword": "keyword", "SeverityScoreDeduction": "severity"}, inplace=True)
+                df_severity = df_severity[df_severity['keyword'].notna()]
+                df_severity['keyword'] = df_severity['keyword'].astype(str).str.lower()  # 🛠 critical fix
+
+                df_results = scan_titles_weighted(titles, df_keywords, df_severity)
+                st.success("Scan complete!")
+                st.dataframe(df_results)
+
+                from io import BytesIO
+                output = BytesIO()
+                with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                    df_results.to_excel(writer, index=False, sheet_name='Scan Results')
+                st.download_button(
+                    label="Download Excel File",
+                    data=output.getvalue(),
+                    file_name="youtube_title_scan_results.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
+    except Exception as e:
+        st.error(f"Something went wrong: {e}")
