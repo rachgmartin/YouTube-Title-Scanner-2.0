@@ -6,14 +6,31 @@ from context_flags import detect_contextual_flags
 def scan_titles_weighted(titles, df_keywords, df_severity):
     results = []
 
-    # Risky phrases grouped by type
+    # Risky phrase categories and severity impact
     risky_phrases = {
-        "Clickbait/False Claims": [r"earn \$\d+", r"make money fast", r"get rich quick", r"shocking secret"],
-        "Injury or Danger": [r"nearly died", r"almost killed", r"dangerous challenge"],
-        "Overstated Language": [r"you won’t believe", r"insane", r"crazy deal"]
+        "Clickbait": {
+            "patterns": [r"you won't believe", r"shocking", r"gone wrong", r"insane", r"crazy", r"exposed"],
+            "severity": 10
+        },
+        "Health Misinformation": {
+            "patterns": [r"cure cancer", r"anti-vax", r"miracle cure", r"flat earth"],
+            "severity": 30
+        },
+        "Financial Misleading": {
+            "patterns": [r"get rich quick", r"earn \$\d+", r"make money fast", r"no experience needed"],
+            "severity": 25
+        },
+        "Manipulative Urgency": {
+            "patterns": [r"limited time", r"before it's too late", r"act now"],
+            "severity": 15
+        },
+        "Overpromising": {
+            "patterns": [r"guaranteed results", r"100% success", r"never fail"],
+            "severity": 20
+        }
     }
 
-    # Emotional tone flags
+    # Emotional tone flags (do not affect score)
     emotional_tones = {
         "Anger": ["hate", "rage", "destroy"],
         "Fear": ["scared", "panic", "terrified"],
@@ -40,15 +57,17 @@ def scan_titles_weighted(titles, df_keywords, df_severity):
                 if pd.notna(row.get('category')):
                     categories.add(row['category'])
 
-                severity = df_severity.loc[df_severity['keyword'] == keyword, 'severity'].values
+                severity = df_severity.loc[df_severity['Keyword'] == keyword, 'SeverityScoreDeduction'].values
                 if severity.size > 0:
                     total_severity += severity[0]
 
-        # Risky phrasing detection
-        for label, patterns in risky_phrases.items():
-            for pattern in patterns:
+        # Phrase-based scoring
+        for label, obj in risky_phrases.items():
+            for pattern in obj["patterns"]:
                 if re.search(pattern, lower_title):
                     context_reason.append(f"Phrase flagged: {label}")
+                    categories.add(label)
+                    total_severity += obj["severity"]
 
         # Emotional tone tagging
         for tone, words in emotional_tones.items():
@@ -56,18 +75,9 @@ def scan_titles_weighted(titles, df_keywords, df_severity):
                 if re.search(rf"\b{re.escape(word)}\b", lower_title):
                     categories.add(f"Emotional Tone: {tone}")
 
-        # Contextual phrase flagging from helper function
-        new_contexts = detect_contextual_flags(title)
-        context_reason.extend(new_contexts)
-        for ctx in new_contexts:
-            if 'Phrase flagged:' in ctx:
-                label = ctx.replace('Phrase flagged: ', '').strip()
-                categories.add(label)
-
         # Final scoring
         base_score = 100 - total_severity
         base_score = max(0, min(100, base_score))
-        confidence_score = min(100, len(flagged) * 10 + total_severity)
 
         results.append({
             'Title': title,
@@ -75,7 +85,6 @@ def scan_titles_weighted(titles, df_keywords, df_severity):
             'Context Reason': ", ".join(context_reason) if context_reason else "-",
             'Category': ", ".join(categories) if categories else "-",
             'Safety Score': base_score,
-            'Confidence Score': confidence_score,
             'Less Harsh Keywords': ", ".join(
                 df_keywords[df_keywords['keyword'].isin(flagged)]['Less Harsh Keyword'].fillna("-").astype(str)
             ) if flagged else "-",

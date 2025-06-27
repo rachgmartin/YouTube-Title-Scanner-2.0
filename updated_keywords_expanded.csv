@@ -1,64 +1,68 @@
-Flagged Keyword,Less Harsh Keyword,Alternative Keyword,Opposite Keyword
-scam,trick,mislead,trust
-scams,mislead,misleads,trusts
-scammer,con,fraudster,helper
-scammed,deceived,fooled,helped
-scamming,deceiving,tricking,helping
-revenge,payback,justice,forgiveness
-evil,mean,bad,good
-bully,tease,challenger,support
-bullies,teasers,challengers,supporters
-bullied,teased,challenged,celebrated
-devil,villain,enemy,angel
-force,pressure,urge,freedom
-forced,pressured,urged,free
-forces,persuades,coerces,liberates
-forcing,pushing,urging,allowing
-injure,hurt,pain,heal
-injured,hurt,hurt,healed
-injures,hurts,injures,heals
-victim,target,survivor,protector
-kill,harm,attack,save
-killed,harmed,attacked,saved
-killing,harming,fighting,saving
-kills,hurts,attacks,saves
-violence,aggression,conflict,peace
-violent,aggressive,intense,calm
-abuse,mistreat,mistreatment,care
-abused,mistreated,hurt,respected
-abusive,controlling,controlling,gentle
-porn,explicit,adult,safe
-pornographic,mature,explicit,clean
-sex,intimacy,intimate,love
-sexual,romantic,flirty,affection
-sexy,attractive,provocative,classy
-nude,bare,revealing,dressed
-nudity,unclothed,bare skin,clothed
-trauma,shock,distress,comfort
-traumatized,affected,shocked,resilient
-molest,assault,incident,cared for
-molestation,incident,experience,safe
-harass,bother,uncomfortable,respected
-harassed,offended,teased,supported
-harassment,mistreatment,mistreatment,kindness
-murder,crime,crime,rescue
-raped,attacked,attacked,safe
-rape,assault,incident,prevention
-rapist,attacker,offender,supporter
-suicide,loss,dark thoughts,hope
-suicidal,distressed,crisis,healing
-death,passing,loss,life
-dead,gone,gone,alive
-toxic,unhealthy,harmful,healthy
-steals,takes,borrows,gives
-shamed,embarrassed,humiliated,praised
-poor,struggling,broke,wealthy
-abuses,mistreats,hurts,cares for
-addicted,dependent,obsessed,balanced
-dumped,left,rejected,chosen
-hates,dislikes,disrespects,loves
-tormented,mistreated,bullied,comforted
-shunned,ignored,excluded,welcomed
-alienated,excluded,separated,included
-ostracized,left out,excluded,embraced
-neglected,overlooked,forgotten,valued
+keyword,context,category,Flagged Keyword,Less Harsh Keyword,Alternative Keyword,Opposite Keyword
+fuck,Strong profanity,profanity,fuck,-,-,-
+shit,Moderate profanity,profanity,shit,-,-,-
+damn,Mild profanity,profanity,damn,-,-,-
+asshole,Moderate profanity,profanity,asshole,-,-,-
+bitch,Moderate profanity,profanity,bitch,-,-,-
+bastard,Insulting language,profanity,bastard,-,-,-
+kill,Describes physical violence,violence,kill,-,-,-
+murder,Extreme violence,violence,murder,-,-,-
+blood,Graphic imagery,violence,blood,-,-,-
+gun,References weapons,violence,gun,-,-,-
+shoot,Gun violence,violence,shoot,-,-,-
+weed,Recreational drug reference,drugs,weed,-,-,-
+cocaine,Illegal drug reference,drugs,cocaine,-,-,-
+heroin,Hard drug reference,drugs,heroin,-,-,-
+pills,Could imply misuse of medication,drugs,pills,-,-,-
+crazy,Insensitive to mental health,mental health,crazy,-,-,-
+psycho,Stigmatizing mental illness,mental health,psycho,-,-,-
+insane,Stigmatizing term,mental health,insane,-,-,-
+nude,Sexually suggestive content,sexually suggestive,nude,-,-,-
+sex,Explicit sexual content,sexually suggestive,sex,-,-,-
+porn,Adult material,sexually suggestive,porn,-,-,-
+scam,Implies fraud or deception,financial,scam,-,-,-
+scammer,Fraudulent actor,financial,scammer,-,-,-
+get rich,Clickbait / scam implication,financial,get rich,-,-,-
+fat,Body shaming,body shaming,fat,-,-,-
+ugly,Insulting appearance,body shaming,ugly,-,-,-
+poor,Class-based insult,identity,poor,-,-,-
+retarded,Ableist slur,identity,retarded,-,-,-
+terrorist,Political extremism,sensitive events,terrorist,-,-,-
+hell,Mild profanity,profanity,hell,-,-,-
+dick,Crude term,profanity,dick,-,-,-
+cock,Sexual slang,profanity,cock,-,-,-
+pussy,Sexual slang,profanity,pussy,-,-,-
+slut,Sexual insult,profanity,slut,-,-,-
+whore,Derogatory sexual term,profanity,whore,-,-,-
+stab,Violent imagery,violence,stab,-,-,-
+beat,Physical abuse,violence,beat,-,-,-
+torture,Graphic violence,violence,torture,-,-,-
+dead,Death reference,violence,dead,-,-,-
+meth,Hard drug,drugs,meth,-,-,-
+lsd,Psychedelic drug,drugs,lsd,-,-,-
+xanax,Prescription drug misuse,drugs,xanax,-,-,-
+adderall,Stimulant drug reference,drugs,adderall,-,-,-
+sexy,Sexualized language,sexually suggestive,sexy,-,-,-
+onlyfans,Adult content platform,sexually suggestive,onlyfans,-,-,-
+nsfw,Not safe for work,sexually suggestive,nsfw,-,-,-
+orgasm,Explicit term,sexually suggestive,orgasm,-,-,-
+depressed,Mental health issue,mental health,depressed,-,-,-
+suicide,Sensitive mental health topic,mental health,suicide,-,-,-
+anxiety,Mental health condition,mental health,anxiety,-,-,-
+obese,Body size reference,body shaming,obese,-,-,-
+anorexic,Stigmatizing eating disorders,body shaming,anorexic,-,-,-
+fatty,Insulting body term,body shaming,fatty,-,-,-
+cripple,Ableist slur,identity,cripple,-,-,-
+gay,Sexual orientation misuse,identity,gay,-,-,-
+tranny,Transphobic slur,identity,tranny,-,-,-
+illegal,Dehumanizing immigration label,identity,illegal,-,-,-
+broke,Financial instability,financial,broke,-,-,-
+bankrupt,Extreme financial distress,financial,bankrupt,-,-,-
+debt,Negative financial condition,financial,debt,-,-,-
+9/11,Sensitive historic tragedy,sensitive events,9/11,-,-,-
+holocaust,Genocide reference,sensitive events,holocaust,-,-,-
+shooting,Mass violence,sensitive events,shooting,-,-,-
+assault,Criminal violence,sensitive events,assault,-,-,-
+shocking,Overhyping content,clickbait,shocking,-,-,-
+you won't believe,Sensational language,clickbait,you won't believe,-,-,-
+gone wrong,Dramatic exaggeration,clickbait,gone wrong,-,-,-
