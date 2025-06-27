@@ -48,13 +48,13 @@ if st.button("Scan Titles") and api_key and channel_id:
                 df_keywords = pd.read_csv("updated_keywords_expanded.csv")
                 df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
 
-                # ✅ Add this entire block exactly as shown:
+                # ✅ Fix for column name mismatch in df_severity
                 df_severity = pd.read_csv("safety_severity_scores.csv")
-                df_severity = df_severity[df_severity['keyword'].notna()]  # Remove NaNs
-                df_severity['keyword'] = df_severity['keyword'].str.lower()  # Normalize to lowercase
+                df_severity.rename(columns={"Keyword": "keyword", "SeverityScoreDeduction": "severity"}, inplace=True)
+                df_severity = df_severity[df_severity['keyword'].notna()]
+                df_severity['keyword'] = df_severity['keyword'].str.lower()
 
                 df_results = scan_titles_weighted(titles, df_keywords, df_severity)
-
                 st.success("Scan complete!")
                 st.dataframe(df_results)
 
@@ -70,3 +70,4 @@ if st.button("Scan Titles") and api_key and channel_id:
                 )
     except Exception as e:
         st.error(f"Something went wrong: {e}")
+
