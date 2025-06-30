@@ -47,7 +47,8 @@ if st.button("Scan Titles") and api_key and channel_id:
                 df_keywords = pd.read_csv("updated_keywords_expanded.csv")
                 df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
 
-                df_severity = pd.read_csv("safety_severity_scores.csv")
+                df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
+                df_severity.columns = df_severity.columns.str.strip().str.replace('"', '').str.replace("'", '')
                 df_severity.rename(columns={"Keyword": "keyword", "SeverityScoreDeduction": "severity"}, inplace=True)
                 df_severity = df_severity[df_severity['keyword'].notna()]
                 df_severity['keyword'] = df_severity['keyword'].astype(str).str.lower()
