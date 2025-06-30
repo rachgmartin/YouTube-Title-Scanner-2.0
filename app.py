@@ -22,10 +22,10 @@ st.markdown(
     f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;800&display=swap');
-        body {
+        body {{
             background-color: #0E1117;
             color: #FFFFFF;
-        }
+        }}
         .branded-content {{
             font-family: 'Montserrat', sans-serif;
         }}
