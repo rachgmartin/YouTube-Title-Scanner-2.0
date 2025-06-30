@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import requests
-from scan_titles_weighted_contextual import scan_titles_weighted
+from scan_titles_weighted_contextual_v3_riskaware import scan_titles_weighted
 
 st.set_page_config(page_title="YouTube Video Title Scanner", layout="centered")
 
