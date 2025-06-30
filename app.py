@@ -164,7 +164,7 @@ if st.button("Scan Titles") and api_key and channel_id:
                 )
 
                 st.success("Scan complete!")
-                st.dataframe(styled_df, use_container_width=True)
+                st.table(styled_df)
 
                 from io import BytesIO
                 output = BytesIO()
