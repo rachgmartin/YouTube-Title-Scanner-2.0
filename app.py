@@ -41,9 +41,11 @@ st.markdown(
         div.stButton > button {
             background-color: #000000;
             color: #ffffff;
+            border: 1px solid #ffffff;
         }
         div.stButton > button:hover {
             background-color: #333333;
+            border: 1px solid #ff0000;
         }
         /* Duotone filter for images */
         .duotone {
@@ -167,9 +169,30 @@ if st.button("Scan Titles") and api_key and channel_id:
                 st.table(styled_df)
 
                 from io import BytesIO
+                from openpyxl.utils import get_column_letter
+                from openpyxl.styles import Font
+                from openpyxl.formatting.rule import ColorScaleRule
+
                 output = BytesIO()
                 with pd.ExcelWriter(output, engine='openpyxl') as writer:
                     df_results.to_excel(writer, index=False, sheet_name='Scan Results')
+                    workbook = writer.book
+                    worksheet = writer.sheets['Scan Results']
+
+                    # Set column widths and font size
+                    for idx, col in enumerate(df_results.columns, 1):
+                        worksheet.column_dimensions[get_column_letter(idx)].width = 25
+                    for row in worksheet.iter_rows():
+                        for cell in row:
+                            cell.font = Font(size=14)
+
+                    # Apply color scale to Safety Score column
+                    score_idx = df_results.columns.get_loc('Safety Score') + 1
+                    score_letter = get_column_letter(score_idx)
+                    rule = ColorScaleRule(start_type='min', start_color='FF0000', end_type='max', end_color='00FF00')
+                    worksheet.conditional_formatting.add(
+                        f'{score_letter}2:{score_letter}{len(df_results)+1}', rule)
+
                 st.download_button(
                     label="Download Excel File",
                     data=output.getvalue(),
