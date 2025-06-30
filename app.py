@@ -33,6 +33,18 @@ st.markdown(
         div[data-testid="stDownloadButton"] button {
             color: #000000;
         }
+        /* Make form field labels white */
+        label {
+            color: #ffffff !important;
+        }
+        /* Style the primary action button */
+        div.stButton > button {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        div.stButton > button:hover {
+            background-color: #333333;
+        }
     </style>
     """,
     unsafe_allow_html=True,
