@@ -26,6 +26,13 @@ st.markdown(
             background-color: #0e1117;
             color: #f5f5f5;
         }
+        .subtitle {
+            color: #fafafa;
+            font-weight: 600;
+        }
+        div[data-testid="stDownloadButton"] button {
+            color: #000000;
+        }
     </style>
     """,
     unsafe_allow_html=True,
@@ -33,7 +40,8 @@ st.markdown(
 
 st.title("YouTube Title Scanner")
 st.markdown(
-    "Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives."
+    "<p class='subtitle'>Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives.</p>",
+    unsafe_allow_html=True,
 )
 
 api_key = st.text_input(
@@ -118,7 +126,7 @@ if st.button("Scan Titles") and api_key and channel_id:
 
                 # Apply color scaling to Safety Score column
                 styled_df = df_results.style.background_gradient(
-                    cmap="RdYlGn_r", subset=["Safety Score"]
+                    cmap="RdYlGn", subset=["Safety Score"]
                 )
 
                 st.success("Scan complete!")
