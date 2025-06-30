@@ -39,7 +39,11 @@ def scan_titles_weighted(titles, df_keywords, df_severity):
     }
 
     # Ensure keyword column is lowercase
-    df_keywords['keyword'] = df_keywords['keyword'].astype(str).str.lower()
+    if "keyword" in df_keywords.columns:
+        df_keywords['keyword'] = df_keywords['keyword'].astype(str).str.lower()
+    else:
+        print("DEBUG: 'keyword' column not found in df_keywords")
+        print("Columns available:", df_keywords.columns.tolist())
 
     for title in titles:
         flagged = []
