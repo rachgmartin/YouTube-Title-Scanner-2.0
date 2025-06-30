@@ -7,6 +7,8 @@ This app scans video titles from a specified YouTube channel to identify potenti
 - Flags sensitive or inappropriate terms
 - Applies context-aware scoring
 - Outputs Excel reports
+- Includes CSS classes for a duotone image filter
+- Provides responsive aspect-ratio helpers (1:1, 4:3, 16:9)
 
 ## Setup
 1. Install requirements:

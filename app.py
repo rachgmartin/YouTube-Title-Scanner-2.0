@@ -45,6 +45,28 @@ st.markdown(
         div.stButton > button:hover {
             background-color: #333333;
         }
+        /* Duotone filter for images */
+        .duotone {
+            filter: grayscale(100%) contrast(1.2) brightness(0.8) sepia(1) hue-rotate(200deg) saturate(4);
+        }
+
+        /* Responsive aspect ratio containers */
+        .aspect-1-1 {
+            aspect-ratio: 1 / 1;
+        }
+        .aspect-4-3 {
+            aspect-ratio: 4 / 3;
+        }
+        .aspect-16-9 {
+            aspect-ratio: 16 / 9;
+        }
+        .aspect-1-1 img,
+        .aspect-4-3 img,
+        .aspect-16-9 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
     """,
     unsafe_allow_html=True,
