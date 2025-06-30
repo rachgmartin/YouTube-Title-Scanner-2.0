@@ -13,8 +13,28 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 st.set_page_config(page_title="YouTube Title Scanner", layout="centered")
+
+# -- Custom dark theme styling --
+st.markdown(
+    """
+    <style>
+        .stApp {
+            background-color: #0e1117;
+            color: #e0e0e0;
+        }
+        .stDataFrame, .stTable {
+            background-color: #0e1117;
+            color: #e0e0e0;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 st.title("YouTube Title Scanner")
-st.markdown("Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives.")
+st.markdown(
+    "Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives."
+)
 
 api_key = st.text_input(
     "Enter your YouTube Data API Key",
@@ -93,8 +113,16 @@ if st.button("Scan Titles") and api_key and channel_id:
                 df_severity['keyword'] = df_severity['keyword'].astype(str).str.lower()
 
                 df_results = scan_titles_weighted(titles, df_keywords, df_severity)
+                # Sort results by Safety Score (ascending)
+                df_results = df_results.sort_values(by="Safety Score")
+
+                # Apply color scaling to Safety Score column
+                styled_df = df_results.style.background_gradient(
+                    cmap="RdYlGn_r", subset=["Safety Score"]
+                )
+
                 st.success("Scan complete!")
-                st.dataframe(df_results)
+                st.dataframe(styled_df, use_container_width=True)
 
                 from io import BytesIO
                 output = BytesIO()
