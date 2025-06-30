@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import requests
-from scan_titles_weighted_contextual import scan_titles_weighted
+from scan_titles_weighted_contextual_v3_riskaware import scan_titles_weighted
 
 st.set_page_config(page_title="YouTube Video Title Scanner", layout="centered")
 
@@ -46,7 +46,17 @@ if st.button("Scan Titles") and api_key and channel_id:
                 st.warning("No titles found or API quota exceeded.")
             else:
                 df_keywords = pd.read_csv("updated_keywords_expanded.csv")
-                df_severity = pd.read_csv("safety_severity_scores.csv")
+                df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
+
+                df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
+                df_severity.columns = df_severity.columns.str.strip().str.replace('"', '').str.replace("'", '')
+                if "Keyword" in df_severity.columns:
+                    df_severity.rename(columns={"Keyword": "keyword"}, inplace=True)
+                if "SeverityScoreDeduction" in df_severity.columns:
+                    df_severity.rename(columns={"SeverityScoreDeduction": "severity"}, inplace=True)
+                df_severity = df_severity[df_severity['keyword'].notna()]
+                df_severity['keyword'] = df_severity['keyword'].astype(str).str.lower()
+
                 df_results = scan_titles_weighted(titles, df_keywords, df_severity)
                 st.success("Scan complete!")
                 st.dataframe(df_results)
