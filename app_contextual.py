@@ -12,60 +12,12 @@ load_dotenv()
 
 st.set_page_config(page_title="YouTube Video Title Scanner", layout="centered")
 
-# -- Custom dark theme styling --
+# Optional subtitle styling scoped to a class
 st.markdown(
     """
     <style>
-        .stApp {
-            background-color: #0e1117;
-            color: #f5f5f5;
-        }
-        .stDataFrame, .stTable {
-            background-color: #0e1117;
-            color: #f5f5f5;
-        }
         .subtitle {
-            color: #fafafa;
             font-weight: 600;
-        }
-        div[data-testid="stDownloadButton"] button {
-            color: #000000;
-        }
-        /* Make form field labels white */
-        label {
-            color: #ffffff !important;
-        }
-        /* Style the primary action button */
-        div.stButton > button {
-            background-color: #000000;
-            color: #ffffff;
-            border: 1px solid #ffffff;
-        }
-        div.stButton > button:hover {
-            background-color: #333333;
-            border: 1px solid #ff0000;
-        }
-        /* Duotone filter for images */
-        .duotone {
-            filter: grayscale(100%) contrast(1.2) brightness(0.8) sepia(1) hue-rotate(200deg) saturate(4);
-        }
-
-        /* Responsive aspect ratio containers */
-        .aspect-1-1 {
-            aspect-ratio: 1 / 1;
-        }
-        .aspect-4-3 {
-            aspect-ratio: 4 / 3;
-        }
-        .aspect-16-9 {
-            aspect-ratio: 16 / 9;
-        }
-        .aspect-1-1 img,
-        .aspect-4-3 img,
-        .aspect-16-9 img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
     </style>
     """,
@@ -126,7 +78,7 @@ if st.button("Scan Titles") and api_key and channel_id:
                     cmap="RdYlGn", subset=["Safety Score"]
                 )
                 st.success("Scan complete!")
-                st.table(styled_df)
+                st.dataframe(styled_df, use_container_width=True)
 
                 # ✅ Excel download block
                 from io import BytesIO
