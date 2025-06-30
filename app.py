@@ -3,6 +3,10 @@ import streamlit as st
 import pandas as pd
 from scan_titles_weighted_contextual_v3_riskaware import scan_titles_weighted
 import requests
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 st.set_page_config(page_title="YouTube Title Scanner", layout="centered")
 st.title("YouTube Title Scanner")
@@ -49,14 +53,14 @@ if st.button("Scan Titles") and api_key and channel_id:
                 
                 df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
 
-                # DEBUG: Print original column names
-                print("DEBUG: Raw df_severity.columns =", df_severity.columns.tolist())
+                # DEBUG: Log original column names
+                logger.debug("Raw df_severity.columns = %s", df_severity.columns.tolist())
 
                 # Clean up whitespace and stray characters
                 df_severity.columns = df_severity.columns.str.strip().str.replace('"', '').str.replace("'", '')
 
-                # DEBUG: Print cleaned column names
-                print("DEBUG: Cleaned df_severity.columns =", df_severity.columns.tolist())
+                # DEBUG: Log cleaned column names
+                logger.debug("Cleaned df_severity.columns = %s", df_severity.columns.tolist())
 
                 # Safely rename columns if they exist
                 if "Keyword" in df_severity.columns:
