@@ -9,6 +9,7 @@ This app scans video titles from a specified YouTube channel to identify potenti
 - Outputs Excel reports
 - Includes CSS classes for a duotone image filter
 - Provides responsive aspect-ratio helpers (1:1, 4:3, 16:9)
+- Built-in dark mode styling
 
 ## Setup
 1. Install requirements:
@@ -27,3 +28,4 @@ The app reads environment variables from this `.env` file on startup.
 ```bash
 streamlit run app.py
 ```
+

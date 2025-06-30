@@ -22,6 +22,10 @@ st.markdown(
     f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;800&display=swap');
+        body {
+            background-color: #0E1117;
+            color: #FFFFFF;
+        }
         .branded-content {{
             font-family: 'Montserrat', sans-serif;
         }}
@@ -60,7 +64,7 @@ st.markdown(
         <h1>YouTube Title Scanner</h1>
         <p class="subtitle">Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives.</p>
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path d="M0,30 C200,80 400,0 600,30 C800,60 1000,20 1200,40 C1300,50 1400,40 1440,30 L1440,100 L0,100 Z" fill="#F3F1F4"></path>
+            <path d="M0,30 C200,80 400,0 600,30 C800,60 1000,20 1200,40 C1300,50 1400,40 1440,30 L1440,100 L0,100 Z" fill="#0E1117"></path>
         </svg>
     </div>
     """,
