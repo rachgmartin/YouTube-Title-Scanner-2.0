@@ -1,4 +1,4 @@
-
+print("DEBUG: Columns in df_severity =", df_severity.columns.tolist())
 import pandas as pd
 import re
 from context_flags import detect_contextual_flags
