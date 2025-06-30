@@ -1,0 +1,86 @@
+keyword,context,category,Less Harsh Keyword,Alternative Keyword,Opposite Keyword
+fuck,Strong profanity,profanity,freaking,mess up,succeed
+shit,Moderate profanity,profanity,crap,mess,clean
+damn,Mild profanity,profanity,darn,frustrating,blessed
+asshole,Moderate profanity,profanity,jerk,rude person,kind person
+bitch,Moderate profanity,profanity,mean person,complainer,supportive person
+bastard,Insulting language,profanity,jerk,unkind person,legitimate person
+kill,Describes physical violence,violence,destroy,eliminate,save
+murder,Extreme violence,violence,attack,crime,protect
+blood,Graphic imagery,violence,wound,injury,healing
+gun,References weapons,violence,firearm,weapon,peace
+shoot,Gun violence,violence,fire,trigger,disarm
+weed,Recreational drug reference,drugs,marijuana,cannabis,sobriety
+cocaine,Illegal drug reference,drugs,drug,stimulant,sobriety
+heroin,Hard drug reference,drugs,narcotic,substance,health
+pills,Could imply misuse of medication,drugs,medication,tablets,natural remedy
+crazy,Insensitive to mental health,mental health,wild,unpredictable,grounded
+psycho,Stigmatizing mental illness,mental health,intense,unstable,stable
+insane,Stigmatizing term,mental health,extreme,irrational,sane
+nude,Sexually suggestive content,sexually suggestive,undressed,exposed,clothed
+sex,Explicit sexual content,sexually suggestive,intimacy,physical relationship,celibacy
+porn,Adult material,sexually suggestive,adult content,explicit media,family content
+scam,Implies fraud or deception,financial,trick,fraud,honest deal
+scammer,Fraudulent actor,financial,con artist,fraudster,helper
+get rich,Clickbait / scam implication,financial,make money,become successful,serve others
+fat,Body shaming,body shaming,plus-size,large,fit
+ugly,Insulting appearance,body shaming,unattractive,not conventionally pretty,beautiful
+poor,Class-based insult,identity,low-income,struggling,wealthy
+retarded,Ableist slur,identity,delayed,intellectually disabled,neurotypical
+terrorist,Political extremism,sensitive events,extremist,radical,peacemaker
+hell,Mild profanity,profanity,inferno,suffering,heaven
+dick,Crude term,profanity,jerk,rude guy,gentleman
+cock,Sexual slang,profanity,penis,male anatomy,modesty
+pussy,Sexual slang,profanity,vagina,female anatomy,modesty
+slut,Sexual insult,profanity,promiscuous person,sexually active person,respectful person
+whore,Derogatory sexual term,profanity,sex worker,escort,dignified woman
+stab,Violent imagery,violence,cut,puncture,heal
+beat,Physical abuse,violence,hit,strike,support
+torture,Graphic violence,violence,hurt,torment,comfort
+dead,Death reference,violence,deceased,passed away,alive
+meth,Hard drug,drugs,crystal,methamphetamine,sobriety
+lsd,Psychedelic drug,drugs,acid,hallucinogen,clarity
+xanax,Prescription drug misuse,drugs,medication,anxiety treatment,natural calm
+adderall,Stimulant drug reference,drugs,stimulant,ADHD medication,mindfulness
+sexy,Sexualized language,sexually suggestive,attractive,alluring,modest
+onlyfans,Adult content platform,sexually suggestive,paid content,subscription content,public content
+nsfw,Not safe for work,sexually suggestive,mature,adult content,safe for work
+orgasm,Explicit term,sexually suggestive,climax,pleasure,abstinence
+depressed,Mental health issue,mental health,down,low mood,uplifted
+suicide,Sensitive mental health topic,mental health,self-harm,ending life,survival
+anxiety,Mental health condition,mental health,stress,worry,calm
+obese,Body size reference,body shaming,overweight,larger body type,fit
+anorexic,Stigmatizing eating disorders,body shaming,underweight,disordered eating,nourished
+fatty,Insulting body term,body shaming,large,overweight,slim
+cripple,Ableist slur,identity,disabled,physically impaired,able-bodied
+gay,Sexual orientation misuse,identity,LGBTQ+,homosexual,heterosexual
+tranny,Transphobic slur,identity,trans person,transgender individual,cisgender person
+illegal,Dehumanizing immigration label,identity,unlawful,prohibited,legal
+broke,Financial instability,financial,low-income,struggling financially,financially secure
+bankrupt,Extreme financial distress,financial,insolvent,out of funds,profitable
+debt,Negative financial condition,financial,financial burden,liabilities,wealth
+9/11,Sensitive historic tragedy,sensitive events,September attacks,terror event,peace
+holocaust,Genocide reference,sensitive events,genocide,WWII atrocity,justice
+shooting,Mass violence,sensitive events,gun violence,firearm incident,safety
+assault,Criminal violence,sensitive events,attack,physical confrontation,protect
+shocking,Overhyping content,clickbait,surprising,unexpected,predictable
+you won't believe,Sensational language,clickbait,failed,didn’t work out,success
+gone wrong,Dramatic exaggeration,clickbait,negative,unhealthy,supportive
+toxic,Harmful or emotionally unhealthy behavior,Behavior,aggressor,mean person,ally
+bully,Aggressor causing emotional or physical harm,Bullying,aggressors,mean people,protectors
+bullies,Plural form of bully,Bullying,targeted,mistreated,empowered
+bullied,Victim of prolonged harm or mockery,Bullying,trick,fraud,honest deal
+scam,Fraudulent or misleading offer,Financial,con artist,fraudster,helper
+scammer,Person attempting to deceive others,Financial,frauds,schemes,legitimate deals
+scams,Multiple attempts to deceive,Financial,eliminate,end,save
+kill,Extremely violent or triggering language,Violence,destroys,takes out,preserves
+kills,Present tense of kill,Violence,harmful,hurtful,caring
+abusive,Mistreatment or emotionally damaging behavior,Behavior,humiliated,embarrassed,celebrated
+shamed,Public embarrassment,Social Harm,dislike,anger,love
+hate,Extreme negative emotion,Emotional Tone,wound,mental distress,healing
+trauma,Emotional/psychological wound,Mental Health,wild,irrational,sane
+crazy,Slang or derogatory mental health term,Mental Health,unattractive,unconventional looks,beautiful
+ugly,Judgmental and triggering,Appearance,alarm,anxiety spike,composure
+panic,Implies instability,Mental Health,sensitive person,emotional person,emotionally resilient
+crybaby,Demeaning toward emotions,Emotional Tone,loss,setback,success
+failure,Harsh judgment of outcome,Achievement,adult content,explicit media,family content
