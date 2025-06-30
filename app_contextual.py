@@ -6,7 +6,6 @@ import pandas as pd
 import requests
 from scan_titles_weighted_contextual_v3_riskaware import scan_titles_weighted
 
-load_dotenv()
 
 st.set_page_config(page_title="YouTube Video Title Scanner", layout="centered")
 
