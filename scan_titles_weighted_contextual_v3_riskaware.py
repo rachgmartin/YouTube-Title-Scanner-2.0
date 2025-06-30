@@ -46,22 +46,23 @@ def scan_titles_weighted(titles, df_keywords, df_severity):
 
         lower_title = title.lower()
 
-        # Keyword scanning
-        for _, row in df_keywords.iterrows():
-            print("DEBUG: df_keywords column type = ", type(df_keywords['keyword']))
-            print("DEBUG: current row['keyword'] =", row['keyword'], "| type =", type(row['keyword']))
-            keyword = str(row['keyword']).lower()
-            if re.search(rf'\b{re.escape(keyword)}\b', lower_title):
-                flagged.append(keyword)
+# Keyword scanning
+print("DEBUG: df_keywords column type = ", type(df_keywords['keyword']))  # ✅ move this out here
 
-                if pd.notna(row.get('context')):
-                    context_reason.append(f"{keyword}: {row['context']}")
-                if pd.notna(row.get('category')):
-                    categories.add(row['category'])
+for _, row in df_keywords.iterrows():
+    print("DEBUG: current row['keyword'] =", row['keyword'], "| type =", type(row['keyword']))
+    keyword = str(row['keyword']).lower()
+    if re.search(rf'\b{re.escape(keyword)}\b', lower_title):
+        flagged.append(keyword)
 
-                severity = df_severity[df_severity['Keyword'].astype(str).str.lower() == keyword]['SeverityScoreDeduction'].values
-                if severity.size > 0:
-                    total_severity += severity[0]
+        if pd.notna(row.get('context')):
+            context_reason.append(f"{keyword}: {row['context']}")
+        if pd.notna(row.get('category')):
+            categories.add(row['category'])
+
+        severity = df_severity[df_severity['Keyword'].astype(str).str.lower() == keyword]['SeverityScoreDeduction'].values
+        if severity.size > 0:
+            total_severity += severity[0]
 
         # Phrase-based scoring
         for label, obj in risky_phrases.items():
