@@ -1,9 +1,9 @@
-print("DEBUG: Columns in df_severity =", df_severity.columns.tolist())
 import pandas as pd
 import re
 from context_flags import detect_contextual_flags
 
 def scan_titles_weighted(titles, df_keywords, df_severity):
+    print("DEBUG: Columns in df_severity =", df_severity.columns.tolist())
     print("DEBUG: df_severity column type =", type(df_severity['Keyword']))
     print("DEBUG: df_keywords sample:")
     print(df_keywords.head())
