@@ -46,8 +46,8 @@ if st.button("Scan Titles") and api_key and channel_id:
             else:
                 df_keywords = pd.read_csv("updated_keywords_expanded.csv")
                 df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
-
-               df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
+                
+                df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
 
                 # DEBUG: Check column names before and after cleaning
                 print("DEBUG: Raw severity columns:", df_severity.columns.tolist())
