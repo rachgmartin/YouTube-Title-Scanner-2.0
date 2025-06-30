@@ -45,7 +45,19 @@ if st.button("Scan Titles") and api_key and channel_id:
                 st.warning("No titles found or API quota exceeded.")
             else:
                 df_keywords = pd.read_csv("updated_keywords_expanded.csv")
-                df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
+
+                # The CSV already contains a 'keyword' column. Renaming
+                # 'Flagged Keyword' blindly would create duplicate column
+                # names which causes `DataFrame` objects to appear when
+                # accessing `df_keywords['keyword']`. This leads to errors
+                # when calling Series string methods.  Preserve a single
+                # 'keyword' column instead.
+                if "Flagged Keyword" in df_keywords.columns:
+                    if "keyword" not in df_keywords.columns:
+                        df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
+                    else:
+                        df_keywords["keyword"] = df_keywords["Flagged Keyword"].fillna(df_keywords["keyword"])
+                        df_keywords.drop(columns=["Flagged Keyword"], inplace=True)
                 
                 df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
 
