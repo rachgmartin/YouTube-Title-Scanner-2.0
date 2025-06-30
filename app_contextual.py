@@ -124,7 +124,7 @@ if st.button("Scan Titles") and api_key and channel_id:
                     cmap="RdYlGn", subset=["Safety Score"]
                 )
                 st.success("Scan complete!")
-                st.dataframe(styled_df, use_container_width=True)
+                st.table(styled_df)
 
                 # ✅ Excel download block
                 from io import BytesIO
