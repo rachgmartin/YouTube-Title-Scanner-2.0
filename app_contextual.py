@@ -1,15 +1,22 @@
 
+import os
+from dotenv import load_dotenv
 import streamlit as st
 import pandas as pd
 import requests
 from scan_titles_weighted_contextual_v3_riskaware import scan_titles_weighted
+
 
 st.set_page_config(page_title="YouTube Video Title Scanner", layout="centered")
 
 st.title("YouTube Video Title Scanner")
 st.markdown("Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives.")
 
-api_key = st.text_input("Enter your YouTube Data API Key", type="password")
+api_key = st.text_input(
+    "Enter your YouTube Data API Key",
+    value=os.getenv("YOUTUBE_API_KEY", ""),
+    type="password",
+)
 channel_id = st.text_input("Enter the YouTube Channel ID (e.g., UC_x5XG1OV2P6uZZ5FSM9Ttw)")
 max_results = st.number_input("Maximum number of titles to fetch", min_value=1, max_value=500, value=100)
 

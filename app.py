@@ -1,14 +1,26 @@
 
+import os
+from dotenv import load_dotenv
 import streamlit as st
 import pandas as pd
 from scan_titles_weighted_contextual_v3_riskaware import scan_titles_weighted
 import requests
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+load_dotenv()
 
 st.set_page_config(page_title="YouTube Title Scanner", layout="centered")
 st.title("YouTube Title Scanner")
 st.markdown("Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives.")
 
-api_key = st.text_input("Enter your YouTube Data API Key", type="password")
+api_key = st.text_input(
+    "Enter your YouTube Data API Key",
+    value=os.getenv("YOUTUBE_API_KEY", ""),
+    type="password",
+)
 channel_id = st.text_input("Enter the YouTube Channel ID (e.g., UC_x5XG1OV2P6uZZ5FSM9Ttw)")
 max_results = st.number_input("Maximum number of titles to fetch", min_value=1, max_value=500, value=100)
 
@@ -45,18 +57,30 @@ if st.button("Scan Titles") and api_key and channel_id:
                 st.warning("No titles found or API quota exceeded.")
             else:
                 df_keywords = pd.read_csv("updated_keywords_expanded.csv")
-                df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
+
+                # The CSV already contains a 'keyword' column. Renaming
+                # 'Flagged Keyword' blindly would create duplicate column
+                # names which causes `DataFrame` objects to appear when
+                # accessing `df_keywords['keyword']`. This leads to errors
+                # when calling Series string methods.  Preserve a single
+                # 'keyword' column instead.
+                if "Flagged Keyword" in df_keywords.columns:
+                    if "keyword" not in df_keywords.columns:
+                        df_keywords.rename(columns={"Flagged Keyword": "keyword"}, inplace=True)
+                    else:
+                        df_keywords["keyword"] = df_keywords["Flagged Keyword"].fillna(df_keywords["keyword"])
+                        df_keywords.drop(columns=["Flagged Keyword"], inplace=True)
                 
                 df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
 
-                # DEBUG: Print original column names
-                print("DEBUG: Raw df_severity.columns =", df_severity.columns.tolist())
+                # DEBUG: Log original column names
+                logger.debug("Raw df_severity.columns = %s", df_severity.columns.tolist())
 
                 # Clean up whitespace and stray characters
                 df_severity.columns = df_severity.columns.str.strip().str.replace('"', '').str.replace("'", '')
 
-                # DEBUG: Print cleaned column names
-                print("DEBUG: Cleaned df_severity.columns =", df_severity.columns.tolist())
+                # DEBUG: Log cleaned column names
+                logger.debug("Cleaned df_severity.columns = %s", df_severity.columns.tolist())
 
                 # Safely rename columns if they exist
                 if "Keyword" in df_severity.columns:

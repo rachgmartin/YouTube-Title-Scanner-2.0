@@ -13,10 +13,12 @@ This app scans video titles from a specified YouTube channel to identify potenti
    ```
    pip install -r requirements.txt
    ```
-2. Set your API key in a `.env` file:
+2. Set your API key in a `.env` file (automatically loaded on startup):
    ```
    YOUTUBE_API_KEY=your_api_key_here
    ```
+
+Environment variables defined in this file will be loaded automatically when the app starts.
 
 ## Run the app
 ```bash
