@@ -1,3 +1,5 @@
+print("DEBUG: df_severity column type = ", type(df_severity['Keyword']))
+print("DEBUG: df_keywords column type = ", type(df_keywords['keyword']))
 
 import pandas as pd
 import re
@@ -48,7 +50,8 @@ def scan_titles_weighted(titles, df_keywords, df_severity):
 
         # Keyword scanning
         for _, row in df_keywords.iterrows():
-            keyword = row['keyword'].lower()
+            print("DEBUG: current row['keyword'] =", row['keyword'], "| type =", type(row['keyword']))
+            keyword = str(row['keyword']).lower()
             if re.search(rf'\b{re.escape(keyword)}\b', lower_title):
                 flagged.append(keyword)
 
