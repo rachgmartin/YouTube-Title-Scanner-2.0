@@ -59,8 +59,8 @@ if st.button("Scan Titles") and api_key and channel_id:
                 print("DEBUG: Cleaned df_severity.columns =", df_severity.columns.tolist())
 
                 # Safely rename columns if they exist
-                if "Keyword" in df_severity.columns:
-                    df_severity.rename(columns={"Keyword": "keyword"}, inplace=True)
+                if "keyword" in df_severity.columns:
+                    df_severity.rename(columns={"keyword": "keyword"}, inplace=True)
                 if "SeverityScoreDeduction" in df_severity.columns:
                     df_severity.rename(columns={"SeverityScoreDeduction": "severity"}, inplace=True)
 
