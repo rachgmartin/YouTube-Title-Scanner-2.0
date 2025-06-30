@@ -18,11 +18,11 @@ st.markdown(
     <style>
         .stApp {
             background-color: #0e1117;
-            color: #e0e0e0;
+            color: #f5f5f5;
         }
         .stDataFrame, .stTable {
             background-color: #0e1117;
-            color: #e0e0e0;
+            color: #f5f5f5;
         }
     </style>
     """,
