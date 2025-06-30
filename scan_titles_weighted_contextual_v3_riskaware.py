@@ -5,6 +5,17 @@ from context_flags import detect_contextual_flags
 
 def scan_titles_weighted(titles, df_keywords, df_severity):
     print("DEBUG: Columns in df_severity =", df_severity.columns.tolist())
+
+    # Standardise df_severity column names so `.str` can be safely used
+    df_severity = df_severity.rename(columns=lambda c: c.strip().lower())
+    if 'severityscorededuction' in df_severity.columns:
+        df_severity.rename(columns={'severityscorededuction': 'severity'}, inplace=True)
+
+    if 'keyword' not in df_severity.columns or 'severity' not in df_severity.columns:
+        raise ValueError("df_severity must contain 'keyword' and 'severity' columns")
+
+    df_severity['keyword'] = df_severity['keyword'].astype(str).str.lower()
+
     results = []
 
     # Risky phrase categories and severity impact

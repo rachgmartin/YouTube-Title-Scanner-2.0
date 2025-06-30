@@ -3,7 +3,21 @@ import pandas as pd
 import re
 
 def scan_titles_weighted(titles, df_mapping, df_severity):
-    severity_lookup = dict(zip(df_severity['Keyword'].str.lower(), df_severity['SeverityScoreDeduction']))
+    # Normalize column names to avoid attribute errors when using `.str`
+    df_severity = df_severity.rename(columns=lambda c: c.strip().lower())
+
+    if 'severityscorededuction' in df_severity.columns:
+        df_severity.rename(columns={'severityscorededuction': 'severity'}, inplace=True)
+
+    if 'keyword' not in df_severity.columns or 'severity' not in df_severity.columns:
+        raise ValueError("df_severity must contain 'keyword' and 'severity' columns")
+
+    severity_lookup = dict(
+        zip(
+            df_severity['keyword'].astype(str).str.lower(),
+            df_severity['severity']
+        )
+    )
     results = []
 
     for title in titles:
