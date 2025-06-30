@@ -6,6 +6,7 @@ import re
 from context_flags import detect_contextual_flags
 
 def scan_titles_weighted(titles, df_keywords, df_severity):
+    print("DEBUG: df_severity column type =", type(df_severity['Keyword']))
     results = []
 
     # Risky phrase categories and severity impact
