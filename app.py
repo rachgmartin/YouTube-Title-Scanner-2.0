@@ -49,19 +49,24 @@ if st.button("Scan Titles") and api_key and channel_id:
                 
                 df_severity = pd.read_csv("safety_severity_scores.csv", encoding="utf-8-sig")
 
-                # DEBUG: Check column names before and after cleaning
-                print("DEBUG: Raw severity columns:", df_severity.columns.tolist())
+                # DEBUG: Print original column names
+                print("DEBUG: Raw df_severity.columns =", df_severity.columns.tolist())
+
+                # Clean up whitespace and stray characters
                 df_severity.columns = df_severity.columns.str.strip().str.replace('"', '').str.replace("'", '')
-                print("DEBUG: Cleaned severity columns:", df_severity.columns.tolist())
 
-                # Rename using the cleaned names
-                df_severity.rename(columns=lambda x: x.strip(), inplace=True)
-                df_severity.rename(columns={"Keyword": "keyword", "SeverityScoreDeduction": "severity"}, inplace=True)
+                # DEBUG: Print cleaned column names
+                print("DEBUG: Cleaned df_severity.columns =", df_severity.columns.tolist())
 
-                # Final cleanup
+                # Safely rename columns if they exist
+                if "Keyword" in df_severity.columns:
+                df_severity.rename(columns={"Keyword": "keyword"}, inplace=True)
+                if "SeverityScoreDeduction" in df_severity.columns:
+                df_severity.rename(columns={"SeverityScoreDeduction": "severity"}, inplace=True)
+
+                # Continue with filtering
                 df_severity = df_severity[df_severity['keyword'].notna()]
                 df_severity['keyword'] = df_severity['keyword'].astype(str).str.lower()
-
 
                 df_results = scan_titles_weighted(titles, df_keywords, df_severity)
                 st.success("Scan complete!")
