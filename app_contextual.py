@@ -28,7 +28,7 @@ st.markdown(
             font-family: 'Montserrat', sans-serif;
         }}
         .wave-section {{
-            background: linear-gradient(135deg, #FF0230, #62A362);
+            background: linear-gradient(135deg, #951E3D, #00FFCF);
             color: #FFFFFF;
             text-align: center;
             position: relative;
