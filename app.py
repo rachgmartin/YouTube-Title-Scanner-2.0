@@ -1,6 +1,4 @@
-
 import os
-import base64
 from dotenv import load_dotenv
 import streamlit as st
 import pandas as pd
@@ -15,8 +13,6 @@ load_dotenv()
 
 st.set_page_config(page_title="YouTube Title Scanner", layout="centered")
 
-with open("assets/Studio71_Icon_White.png", "rb") as img_file:
-    logo_b64 = base64.b64encode(img_file.read()).decode()
 
 st.markdown(
     f"""
@@ -37,10 +33,6 @@ st.markdown(
             padding: 3rem 1rem 6rem;
             overflow: hidden;
         }}
-        .wave-section .logo {{
-            width: 120px;
-            margin-bottom: 1rem;
-        }}
         .wave-section h1 {{
             font-weight: 800;
             margin-bottom: 0.2rem;
@@ -60,8 +52,7 @@ st.markdown(
         }}
     </style>
     <div class="branded-content wave-section">
-        <img src="data:image/png;base64,{logo_b64}" class="logo" alt="Studio71 logo" />
-        <h1>YouTube Title Scanner</h1>
+                <h1>YouTube Title Scanner</h1>
         <p class="subtitle">Scan a YouTube channel for advertiser-unfriendly words and suggest safer alternatives.</p>
         <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
             <path d="M0,30 C200,80 400,0 600,30 C800,60 1000,20 1200,40 C1300,50 1400,40 1440,30 L1440,100 L0,100 Z" fill="#0E1117"></path>
