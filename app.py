@@ -81,9 +81,14 @@ max_results = st.number_input("Maximum number of titles to fetch", min_value=1, 
 
 def get_uploads_playlist_id(api_key, channel_id):
     url = f"https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id={channel_id}&key={api_key}"
-    response = requests.get(url).json()
     try:
-        return response['items'][0]['contentDetails']['relatedPlaylists']['uploads']
+        response = requests.get(url, timeout=10)
+        data = response.json()
+    except requests.exceptions.RequestException as e:
+        logger.error("Error fetching channel details: %s", e)
+        return None
+    try:
+        return data['items'][0]['contentDetails']['relatedPlaylists']['uploads']
     except (KeyError, IndexError):
         return None
 
@@ -92,10 +97,15 @@ def fetch_video_titles(api_key, uploads_playlist_id, max_results):
     page_token = ""
     while len(titles) < max_results:
         url = f"https://www.googleapis.com/youtube/v3/playlistItems?key={api_key}&playlistId={uploads_playlist_id}&part=snippet&maxResults=50&pageToken={page_token}"
-        response = requests.get(url).json()
-        for item in response.get("items", []):
+        try:
+            response = requests.get(url, timeout=10)
+            data = response.json()
+        except requests.exceptions.RequestException as e:
+            logger.error("Error fetching playlist items: %s", e)
+            break
+        for item in data.get("items", []):
             titles.append(item["snippet"]["title"])
-        page_token = response.get("nextPageToken", "")
+        page_token = data.get("nextPageToken", "")
         if not page_token:
             break
     return titles[:max_results]
